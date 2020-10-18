@@ -69,6 +69,7 @@ class DataExplorer:
             correlation = matrix.corr()
             correlation.to_csv('outputs/correlations/{}_correlations.csv'.format(labels[i]))
             sn.heatmap(correlation, annot=False)
+            plt.tight_layout()
             plt.savefig('outputs/correlations/{}_correlations.png'.format(labels[i]))
             plt.show()
             i += 1
