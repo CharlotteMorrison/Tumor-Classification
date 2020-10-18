@@ -2,6 +2,16 @@
 Comparison of the efficacy of classification methods utilizing breast cancer tumor data.
 
 ## Classification Methods and Results
+Binary Classification: malignant or benign
+* K Nearest Neighbors Classifier.
+* Support Vector Classifier.
+* Gaussian Process Classifier based on Laplace approximation.
+* Decision Tree Classifier.
+* Random Forrest Classifier.
+* Multi-layer Perceptron classifier.
+* AdaBoost Classifier (AdaBoost-SAMME).
+* Gaussian Naive Bayes Classifier.
+* Quadratic Discriminant Analysis.
 
 
 ## Dataset Information

@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import io
 from sklearn.model_selection import train_test_split
-from pandas.plotting import scatter_matrix
+from sklearn.preprocessing import StandardScaler
 import seaborn as sn
 
 
@@ -38,6 +38,7 @@ class DataExplorer:
     def split_test_train(self, test_ratio=0.2):
         X = self.df.copy(deep=True)
         X = X.drop(X.columns[[0]], axis=1)
+        # X = StandardScaler().fit_transform(X)
         y = self.df[['diagnosis']]
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_ratio, random_state=42)
         return X_train, X_test, y_train, y_test
@@ -71,14 +72,6 @@ class DataExplorer:
             sn.heatmap(correlation, annot=False)
             plt.tight_layout()
             plt.savefig('outputs/correlations/{}_correlations.png'.format(labels[i]))
-            plt.show()
+            # plt.show()
             i += 1
             plt.close()
-
-        matrix_df = df[attributes[10:20]]
-
-        matrix_df = df[attributes[20:30]]
-
-
-
-

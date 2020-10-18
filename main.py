@@ -1,4 +1,5 @@
 from exploration import DataExplorer
+from classifiers import DataClassifier
 
 if __name__ == "__main__":
     # the dataset has 3 values for each of the attributes: mean, standard error and worst (largest)
@@ -32,9 +33,8 @@ if __name__ == "__main__":
     # create a correlation matrix scatter plot for feature reduction
     cancer.create_scatter_matrix(cancer_x_train)
 
-    # attribute scaling
+    cancer_classifier = DataClassifier(cancer_x_train, cancer_y_train)
+    cancer_classifier.run_sgd()
 
-
-    # TODO maybe add crossfold validation
 
 
