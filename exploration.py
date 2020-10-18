@@ -2,6 +2,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import io
 from sklearn.model_selection import train_test_split
+from pandas.plotting import scatter_matrix
+import seaborn as sn
 
 
 class DataExplorer:
@@ -31,6 +33,7 @@ class DataExplorer:
         self.df.hist(bins=50, figsize=(20, 15))
         plt.savefig("outputs/histograms.png")
         # plt.show()
+        plt.close()
 
     def split_test_train(self, test_ratio=0.2):
         X = self.df.copy(deep=True)
@@ -38,5 +41,43 @@ class DataExplorer:
         y = self.df[['diagnosis']]
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_ratio, random_state=42)
         return X_train, X_test, y_train, y_test
+
+    def create_scatter_matrix(self, df):
+        # save the complete correlation matrix to a file
+        correlation = df.corr()
+        correlation.to_csv('outputs/correlations/all_correlations.csv')
+        sn.heatmap(correlation, annot=False)
+        plt.savefig('outputs/correlations/all_correlations.png')
+        # plt.show()
+        plt.close()
+
+        # create matrix of each 3 measures for attributes
+        attributes = df.columns.tolist()
+        for i in range(10):
+            matrix_att = [attributes[i], attributes[i + 10], attributes[i + 20]]
+            matrix_df = df[matrix_att]
+            corr_matrix = matrix_df.corr()
+            sn.heatmap(corr_matrix, annot=True)
+            name = attributes[i].split('_')[0]
+            plt.savefig('outputs/correlations/{}_correlation_matrix.png'.format(name))
+            plt.close()
+        # create a matrix for each grouping of attributes (all mean, se, worst)
+        matrix_df = [df[attributes[:10]], df[attributes[10:20]], df[attributes[20:30]]]
+        labels = ['mean', 'se', 'worst']
+        i = 0
+        for matrix in matrix_df:
+            correlation = matrix.corr()
+            correlation.to_csv('outputs/correlations/{}_correlations.csv'.format(labels[i]))
+            sn.heatmap(correlation, annot=False)
+            plt.savefig('outputs/correlations/{}_correlations.png'.format(labels[i]))
+            plt.show()
+            i += 1
+            plt.close()
+
+        matrix_df = df[attributes[10:20]]
+
+        matrix_df = df[attributes[20:30]]
+
+
 
 

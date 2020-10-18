@@ -23,9 +23,18 @@ if __name__ == "__main__":
 
     cancer = DataExplorer(cancer_file, cancer_labels)
 
+    # get basic information about the whole dataset
     cancer.get_data_structure()
 
+    # split the dataset for train/test
     cancer_x_train, cancer_x_test, cancer_y_train, cancer_y_test = cancer.split_test_train()
+
+    # create a correlation matrix scatter plot for feature reduction
+    cancer.create_scatter_matrix(cancer_x_train)
+
+    # attribute scaling
+
+
     # TODO maybe add crossfold validation
 
 
