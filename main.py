@@ -21,6 +21,11 @@ if __name__ == "__main__":
 
     cancer_file = "datasets/wdbc.data"
 
-    cancer_df = DataExplorer(cancer_file, cancer_labels)
+    cancer = DataExplorer(cancer_file, cancer_labels)
 
-    cancer_df.get_data_structure()
+    cancer.get_data_structure()
+
+    cancer_x_train, cancer_x_test, cancer_y_train, cancer_y_test = cancer.split_test_train()
+    # TODO maybe add crossfold validation
+
+
