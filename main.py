@@ -34,7 +34,11 @@ if __name__ == "__main__":
     cancer.create_scatter_matrix(cancer_x_train)
 
     cancer_classifier = DataClassifier(cancer_x_train, cancer_y_train)
-    cancer_classifier.run_sgd()
+
+    # run all classifiers
+    cancer_classifier.run_classifiers()
+
+    # test the classifiers against the test sets.
 
 
 

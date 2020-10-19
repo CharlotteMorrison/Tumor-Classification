@@ -3,6 +3,7 @@ Comparison of the efficacy of classification methods utilizing breast cancer tum
 
 ## Classification Methods and Results
 Binary Classification: malignant or benign
+* Stochastic Gradient Descent Classifier.
 * K Nearest Neighbors Classifier.
 * Support Vector Classifier.
 * Gaussian Process Classifier based on Laplace approximation.
