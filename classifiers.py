@@ -49,13 +49,16 @@ class DataClassifier:
             MLPClassifier(alpha=a, max_iter=iters),
             AdaBoostClassifier(),
             GaussianNB(),
-            QuadraticDiscriminantAnalysis()
+            # QuadraticDiscriminantAnalysis()
         ]
 
     def run_classifiers(self):
         # Stochastic Gradient Descent Classifier
         for file, classifier in zip(self.files, self.classifiers):
-            model = cross_val_predict(classifier, self.train_x, self.train_y, cv=5)
+            if file == 'models/qda':
+                self.train_x.dropna(inplace=True)
+                print(self.train_x.min())
+            model = cross_val_predict(classifier, self.train_x, self.train_y, cv=10)
             self.evaluation_report(model, file)
             pickle.dump(model, open(file + '.pkl', 'wb'))
         self.draw_graphs()

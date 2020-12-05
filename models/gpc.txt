@@ -1,6 +1,6 @@
 Confusion Matrix 
-[[276  10]
- [ 35 134]]
-Precision Score: 0.9305555555555556
-Recall Score: 0.7928994082840237
-F1 Score: 0.8562300319488818
+[[283   3]
+ [  8 161]]
+Precision Score: 0.9817073170731707
+Recall Score: 0.9526627218934911
+F1 Score: 0.9669669669669669

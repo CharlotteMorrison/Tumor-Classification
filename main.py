@@ -22,6 +22,8 @@ if __name__ == "__main__":
 
     cancer_file = "datasets/wdbc.data"
 
+    # TODO run groups of 3 attributes, then try 2: benchmark with attributes chosen in paper
+
     cancer = DataExplorer(cancer_file, cancer_labels)
 
     # get basic information about the whole dataset

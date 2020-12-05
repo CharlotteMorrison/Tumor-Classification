@@ -2,7 +2,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import io
 from sklearn.model_selection import train_test_split
+from sklearn import preprocessing
 from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import QuantileTransformer
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.pipeline import make_pipeline
+from sklearn.compose import make_column_transformer
 import seaborn as sn
 
 
@@ -38,7 +44,16 @@ class DataExplorer:
     def split_test_train(self, test_ratio=0.2):
         X = self.df.copy(deep=True)
         X = X.drop(X.columns[[0]], axis=1)
-        # X = StandardScaler().fit_transform(X)
+        # TODO create a pipeline
+
+        X = SimpleImputer(strategy='median').fit_transform(X)
+        X = preprocessing.scale(X)
+        # X = StandardScaler().fit_transform(X)  # produces negative values, cant use for QDA
+        # X = QuantileTransformer().fit_transform(X)
+        scaler = MinMaxScaler()
+        scaler.fit(X)
+        X = scaler.transform(X)
+        X = pd.DataFrame(X, columns=self.labels[1:])
         y = self.df[['diagnosis']]
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_ratio, random_state=42)
         return X_train, X_test, y_train, y_test
